@@ -1,0 +1,30 @@
+<?php
+
+$btn = 'Entrar';
+$span = 'Ainda não possui conta ?';
+$link = '/cadastrar';
+$texto_link = 'Cadastre-se';
+
+?>
+
+<section class="login">
+    <form class="form-login" method="POST">
+        <?php if($this->view->dados == '/cadastrar'){ 
+        $btn = 'Cadastrar';
+        $span = 'Já possui conta ?';
+        $link = '/login';
+        $texto_link = 'Entrar';    
+        ?>
+            <label>Nome</label>
+            <input type="text" name="nome">
+        <?php } ?>
+        <label>Email</label>
+        <input type="email" name="email">
+        <label>Senha</label>
+        <input type="password" name="senha">
+        <button type="submit"><?php echo $btn ?></button>
+    </form>
+    <br><br>
+    <div class="link-login">
+        <span><?php echo $span ?> <a href="<?php echo $link ?>"><?php echo $texto_link ?></a></span>
+    </div>

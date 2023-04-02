@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&display=swap');
+
+body{
+    background-color: #6495ED;
+    font-family: 'DM Sans', sans-serif;
+}
+a{
+    color:#696969;
+}
+
+.login, .conta{
+    width:60vw;
+    margin: 2em auto;
+    background-color: #FAFAD2;
+    padding: 1em;
+    border-radius: 10px;
+}
+.form-login{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 1em auto;
+}
+.form-login input{
+    height: 2em;
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+.form-login button{
+    height: 3em;
+    width: 8em;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+    margin: 1em auto 0.5em auto;
+    background-color: #363636;
+    color: #fff;
+}
+.conta{
+    margin-top: 3em;
+    min-height: 400px;
+}
+.saldo{
+    margin: 2em;
+}
+.info{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin: auto auto;
+}
+.saldo,.acoes,.acoes-link,.link-login,footer{
+    text-align: center;
+}
+.acoes form{
+    width: 60%;
+    margin: 2em auto;
+    text-align:center;
+}
+
+.acoes form input{
+    width: 14em;
+    margin-top: 0.5em;
+    height: 1.5em;
+}
+
+.acoes form button{
+    width: 6em;
+    height: 2em;
+    font-size: 1.1em;
+    background-color: #363636;
+    color: #FAFAD2;
+    font-weight: bold;
+    border: none;
+    border-radius: 3px;
+}
+
