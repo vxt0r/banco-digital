@@ -5,9 +5,9 @@ use MF\model\Model;
 
 class Conta extends Model{
 
-    public function getConta($id_usuario){
-        $query = '  SELECT nome,numero,saldo FROM conta 
-                    INNER JOIN usuarios ON id_usuario = usuarios.id
+    public function getConta(int $id_usuario):array{
+        $query = '  SELECT nome,numero,saldo FROM conta
+                    INNER JOIN usuario ON id_usuario = usuario.id
                     WHERE id_usuario = ?';
         $stmt= $this->db->prepare($query);
         $stmt->bindValue(1,$id_usuario);
@@ -15,7 +15,7 @@ class Conta extends Model{
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    private function atualizarSaldo($saldo,$id_usuario){
+    private function atualizarSaldo(float $saldo,int $id_usuario):void{
         $query = 'UPDATE conta SET saldo = ? WHERE id_usuario = ?';
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(1,$saldo);
@@ -24,20 +24,20 @@ class Conta extends Model{
         header('location:/');
     }
 
-    public function depositar($valor,$id_usuario){
+    public function depositar(float $valor, int $id_usuario):void{
         $saldo = $this->getConta($id_usuario)[0]['saldo'];
-        $saldo += (float)$valor;
+        $saldo += $valor;
         $this->atualizarSaldo($saldo,$id_usuario);
     }
 
-    public function sacar($valor,$id_usuario){
+    public function sacar(float $valor,int $id_usuario):string{
         $saldo = $this->getConta($id_usuario)[0]['saldo'];
-        $valor = (float) $valor;
         if($valor <= $saldo){
             $saldo -= $valor;
-            $this->atualizarSaldo($saldo,$id_usuario); 
+            $this->atualizarSaldo($saldo,$id_usuario);
+            return '';
         }
-        else 
+        else
             return 'Não é possível sacar essa quantia. Saldo insuficiente';
     }
 }

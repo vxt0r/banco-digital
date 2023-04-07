@@ -5,15 +5,15 @@ use MF\model\Model;
 
 class Autenticacao extends Model{
 
-    private function getUsuario($email){
-        $query = 'SELECT * FROM usuarios WHERE email = ?';
+    private function getUsuario(string $email):array{
+        $query = 'SELECT * FROM usuario WHERE email = ?';
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(1,$email);
         $stmt->execute();
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    private function criarConta($id_usuario){
+    private function criarConta(int $id_usuario):void{
         $numero = rand(1000,9999);
         $query = 'INSERT INTO conta(numero,id_usuario) VALUES (?,?)';
         $stmt = $this->db->prepare($query);
@@ -23,19 +23,19 @@ class Autenticacao extends Model{
         header('location:/login');
     }
 
-    public function cadastrar($nome,$email,$senha){
+    public function cadastrar(string $nome,string $email,string $senha):void{
         $hash = password_hash($senha,PASSWORD_DEFAULT);
-        $query = 'INSERT INTO usuarios(nome,email,senha) VALUES (?,?,?)';
+        $query = 'INSERT INTO usuario(nome,email,senha) VALUES (?,?,?)';
         $stmt = $this->db->prepare($query);
         $stmt->bindValue(1,$nome);
         $stmt->bindValue(2,$email);
         $stmt->bindValue(3,$hash);
         $stmt->execute();
         $usuario = $this->getUsuario($email);
-        $this->criarConta($usuario['id']);
+        $this->criarConta(intval($usuario['id']));
     }
 
-    public function login($email,$senha){
+    public function login(string $email,string $senha){
         $usuario = $this->getUsuario($email);
 
         if(password_verify($senha,$usuario['senha'])){

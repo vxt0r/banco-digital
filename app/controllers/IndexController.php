@@ -23,16 +23,16 @@ class IndexController extends Action{
 
         if(isset($_POST['valor'])){
             if($_GET['acao'] == 'sacar'){
-                $msg = $conta->sacar($_POST['valor'],$_SESSION['id']);
-                $this->view->msg = $msg; 
+                $msg = $conta->sacar(floatval($_POST['valor']),intval($_SESSION['id']));
+                $this->view->msg = $msg;
             }
-            
+
             elseif($_GET['acao'] == 'depositar'){
-                $conta->depositar($_POST['valor'],$_SESSION['id']);
-            } 
+                $conta->depositar(floatval($_POST['valor']),intval($_SESSION['id']));
+            }
         }
 
-        $this->view->dados = $conta->getConta($_SESSION['id']);
+        $this->view->dados = $conta->getConta(intval($_SESSION['id']));
         $this->render('index','layout');
     }
 
@@ -41,6 +41,5 @@ class IndexController extends Action{
         unset($_SESSION['id']);
         header('location: /login');
     }
-   
-}
 
+}
