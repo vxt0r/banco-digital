@@ -1,1 +1,0 @@
-- Aplicação funcionando, futuramente refatorar e tipar
