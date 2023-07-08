@@ -72,11 +72,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
         
-        $user_id = User::where('email',$data['email'])->first();
-
         Conta::create([
             'numero' => rand(1000,9999),
-            'user_id' => $user_id->id
+            'user_id' => $user->id
         ]);
 
         return $user;

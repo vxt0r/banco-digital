@@ -17,7 +17,10 @@
       
     
     @isset($_GET['erro'])
-        <span class="text-danger">{{$_GET['erro']}}</span>
+            <script>
+                alert('Não é possível sacar essa quantia. Saldo insuficiente')
+                window.location.href = '/home'
+            </script>
     @endisset
 
     @isset($_GET['acao'])

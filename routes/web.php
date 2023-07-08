@@ -1,5 +1,6 @@
 <?php
 
+use App\Mail\MensagemEmail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,9 +17,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/home');
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+    ->name('home')
+    ->middleware('verified');
 Route::get('/home?acao=saque', [App\Http\Controllers\HomeController::class, 'index'])->name('home.saque');
 Route::get('/home?acao=deposito', [App\Http\Controllers\HomeController::class, 'index'])->name('home.deposito');
 
