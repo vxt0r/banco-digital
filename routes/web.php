@@ -1,6 +1,6 @@
 <?php
 
-use App\Mail\MensagemEmail;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -15,15 +15,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::redirect('/', '/home');
-
 Auth::routes(['verify'=>true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
-    ->name('home')
-    ->middleware('verified');
-Route::get('/home?acao=saque', [App\Http\Controllers\HomeController::class, 'index'])->name('home.saque');
-Route::get('/home?acao=deposito', [App\Http\Controllers\HomeController::class, 'index'])->name('home.deposito');
+Route::redirect('/', '/home');
 
-Route::post('/home/sacar', [App\Http\Controllers\HomeController::class, 'sacar'])->name('saque');
-Route::post('/home/depositar', [App\Http\Controllers\HomeController::class, 'depositar'])->name('deposito');
+Route::group(['prefix'=> 'home','middleware' => 'verified'],function(){
+    Route::get('/',[App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('?acao=saque',[App\Http\Controllers\HomeController::class, 'index'])->name('home.saque');
+    Route::get('?acao=deposito', [App\Http\Controllers\HomeController::class, 'index'])->name('home.deposito');
+    Route::post('/sacar', [App\Http\Controllers\HomeController::class, 'withdraw'])->name('saque');
+    Route::post('/depositar', [App\Http\Controllers\HomeController::class, 'deposit'])->name('deposito');
+});
+
+Route::group(['prefix'=>'despesa'],function(){
+    Route::get('/',[App\Http\Controllers\HomeController::class, 'expenseControl'])->name('despesa');
+    Route::post('/',[App\Http\Controllers\HomeController::class, 'addExpense'])->name('despesa.add');
+    Route::get('/remove/{id}',[App\Http\Controllers\HomeController::class, 'removeExpense'])->name('despesa.remove');
+});
+
+Route::get('/logs',[App\Http\Controllers\HomeController::class, 'logs'])
+    ->name('logs');
