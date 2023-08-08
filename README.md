@@ -5,6 +5,7 @@
 - Saques e depósitos na conta
 - Controle de despesas
 - Registro de logs
+- Login com confirmação de email
 
 </br>
 <a href="https://youtu.be/BpGuW1rblHQgit@github.com:vxt0r/relatorio.git" target="_blank" rel="noopener noreferrer">Vídeo demonstrativo</a>
@@ -19,7 +20,7 @@
     composer dump-autoload 
     php artisan key:generate
 
-**As configurações da conexão do banco de dados (drive, host, user, password) devem ser feitas no arquivo .env**
+**OBS: Para o funcionamento da aplicação, as configurações da sua conexão com o banco de dados, assim como as configurações do seu servidor SMTP devem ser definidas no arquivo .env, nas constantes que iniciam com DB e MAIL, respectivamente**
 
 **Criar o banco de dados e tabelas**
 
