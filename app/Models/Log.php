@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Log extends Model
 {
     use HasFactory;
-    public $fillable = ['acao','valor','data_hora','conta_id'];
-    public $timestamps = false;
+    public $fillable = ['acao','valor','conta_id'];
     
     public function conta() 
     {

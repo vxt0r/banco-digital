@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-date_default_timezone_set('America/Sao_Paulo');
-
 use App\Models\Conta;
 use App\Models\Despesa;
 use App\Models\Log;
@@ -46,7 +44,7 @@ class HomeController extends Controller
     {
         $user_id = Auth::id();
         $account = Conta::where('user_id',$user_id)->first();
-        $logs = Log::where('conta_id',$account->id)->orderBy('data_hora','desc')->get();
+        $logs = Log::where('conta_id',$account->id)->orderBy('created_at','desc')->get();
         return view('logs',['logs'=>$logs]);
     }
 
@@ -103,7 +101,6 @@ class HomeController extends Controller
         Log::create([
             'acao' => $action,
             'valor' => $_POST['valor'],
-            'data_hora'=> date('Y/d/m H:i'),
             'conta_id' => $account->id
         ]);
     }

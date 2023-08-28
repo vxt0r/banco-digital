@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('logs', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->string('acao');
             $table->decimal('valor',10,2);
-            $table->dateTime('data_hora');
+            // $table->dateTime('data_hora');
             $table->unsignedBigInteger('conta_id');
             $table->foreign('conta_id')->references('id')->on('contas');
         });
