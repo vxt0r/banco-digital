@@ -5,7 +5,7 @@
 @component('_components.navbar')@endcomponent
 
 <section class="text-center">
-    <form action="{{route('despesa.add')}}" method="POST" class="w-75 d-flex justify-content-around mx-auto">
+    <form action="{{route('despesa.add')}}" method="POST" class="expense-form w-75 d-flex justify-content-around mx-auto">
         @csrf
         <label>Despesa</label>
         <input type="text" name="despesa">

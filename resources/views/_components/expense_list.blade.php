@@ -5,15 +5,15 @@
 
 <ul class="mx-auto mt-5 w-50 list-unstyled text-start">
     @foreach ($expenses as $expense)
-        <li class="d-flex justify-content-between mb-4">
+        <li class="expense-item d-flex justify-content-between mb-4">
             
             @php
                 $spent += $expense->valor;
                 $percent = number_format(($expense->valor/$account->saldo)*100,2,',','');
                 $spent_percent += (float)$percent;
             @endphp
-
-            {{$expense->despesa}} (R${{$expense->valor}}) - {{ $percent }}% do seu saldo
+            <span>{{$expense->despesa}} (R${{$expense->valor}}) </span>
+            <span>{{ $percent }}% do seu saldo</span>
             <a href="{{route('despesa.remove',['id'=> $expense->id])}}" class="bg-danger text-white rounded p-2 text-decoration-none">Excluir</a>
         </li>            
     @endforeach

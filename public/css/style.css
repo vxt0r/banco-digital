@@ -1,0 +1,13 @@
+@media(max-width:1000px){
+    .expense-form,.expense-item{
+        display: flex;
+        flex-direction: column;
+    }
+    .expense-form button{
+        margin-top: 0.8em;
+    }
+    .expense-item a {
+        width: 70px;
+    }
+}
+
